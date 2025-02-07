@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="src/CSS/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Pagina web</title>
 </head>
 
 <body>
-    <header>
-        <div class="conteiner">
 
+
+    <header>
+        <div class="conteiner"> <!--conteiner pai-->
+
+            <!-- barra lateral -->
             <div class="content">
                 <div class="logo">
                     <img src="img/channels4_profile.jpg" alt="foto de perfil">
@@ -25,39 +28,73 @@
                     <span><i class="bi bi-columns-gap"></i></span>
                     <span>inicio</span>
                 </div>
-
-                <div class="lista-navegacao">
-                    <ul>
-                        <a href="#"><li><i class="bi bi-box-seam"></i></li>Estoque</a>
-                        <a href="#"><li><i class="bi bi-phone"></i></i></li>Componentes</a>
-                        <a href="#"><li><i class="bi bi-tools"></i></i></li>Materiais</a>
-                    </ul>
-                </div>
-
+                <nav>
+                    <div class="lista-navegacao">
+                        <ul>
+                            <a href="#">
+                                <li><i class="bi bi-box-seam"></i></li>Estoque
+                            </a>
+                            <a href="#">
+                                <li><i class="bi bi-phone"></i></i></li>Componentes
+                            </a>
+                            <a href="#">
+                                <li><i class="bi bi-tools"></i></i></li>Materiais
+                            </a>
+                        </ul>
+                    </div>
+                </nav>
             </div>
 
-            <div class="conteiner-cabecalho">
-
-                <div class="cabecalho">
-                    <span class="titulo">Componentes</span>
-                    <span> / </span>
-                    <span> Estoque</span>
-                </div>
+            <!-- barra lateral -->
 
 
-                <div class="informacoes-usuario">
-                    <div class="infomacoes">
-                        <h1>Seu nome</h1>
-                        <h2> xxxxxxxx@gmail.com</h2>
+            <div class="display"> <!--conteiner flex de separacao-->
+
+                <!--conteiner header principal-->
+                <div class="conteiner-cabecalho">
+
+                    <div class="cabecalho">
+                        <span class="titulo">Componentes</span>
+                        <span> / </span>
+                        <span> Estoque</span>
                     </div>
 
-                    <div class="foto-perfil">
-                        <span><i class="bi bi-person-bounding-box"></i></span>
+
+                    <div class="informacoes-usuario">
+                        <div class="infomacoes">
+                            <h1>Seu nome</h1>
+                            <h2> xxxxxxxx@gmail.com</h2>
+                        </div>
+
+                        <div class="foto-perfil">
+                            <span><i class="bi bi-person-bounding-box"></i></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <!--conteiner header principal-->
+
+                <!--main central painel-->
+                <div class="painel">
+                    <div class="pesquisar">
+
+                        <div class="abaDeProcura">
+                            <span><i class="bi bi-search"></i></span>
+                            <input type="text" name="pesquisa" id="pequisa" placeholder="Pesquisar">
+                        </div>
+
+                        <div class="adiciona-produtos">
+                            <p>Novo</p>
+                            <span>+</span>
+                        </div>
+                    </div>
+
+
+                </div> <!--main central painel-->
+            </div> <!--conteiner flex de separacao-->
+        </div> <!--conteiner pai-->
     </header>
+
+<script src="web.js"></script>
 </body>
 
 </html>
