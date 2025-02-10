@@ -14,5 +14,13 @@ class Produto (models.Model):
         return self.nome
     
 class CustomUser(AbstractUser):
-    tipo_usuario = models.CharField(max_length=50)
+    ADMIN = 'admin'
+    OPERADOR = 'operador'
+    TIPOS_USUARIO = [
+        (ADMIN, 'Administrador'),
+        (OPERADOR, 'Operador'),
+    ]
+    tipo_usuario = models.CharField(
+        max_length=50, choices=TIPOS_USUARIO, default=OPERADOR
+    )
     data_nascimento = models.DateField(null=True, blank=True)

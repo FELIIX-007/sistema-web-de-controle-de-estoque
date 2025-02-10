@@ -42,6 +42,11 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'produtos.CustomUser'
 
+LOGIN_REDIRECT_URL = 'pagina_inicial'  
+LOGOUT_REDIRECT_URL = 'pagina_inicial'  
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'estoque.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
