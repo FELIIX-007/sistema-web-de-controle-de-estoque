@@ -21,7 +21,8 @@
             <!-- barra lateral -->
             <div class="content">
                 <div class="logo">
-                    <img src="img/channels4_profile.jpg" alt="foto de perfil">
+                    <img src="img/Imagem_do_WhatsApp_de_2025-02-10_à_s__15.36.03_e263291e-removebg-preview.png"
+                        alt="foto de perfil">
                 </div>
 
                 <div class="inicio">
@@ -83,18 +84,53 @@
                         </div>
 
                         <div class="adiciona-produtos">
-                            <p>Novo</p>
-                            <span>+</span>
+                            <button id="adiciona-produtos">Novo +</button>
                         </div>
                     </div>
 
+                    <!-- Modal para recuperação de senha -->
+                    <div class="modal" id="recoverModal">
 
+                        <div class="modal-content">
+
+                            <div class="modalCadastro">
+                                <h1>Cadastro de produtos</h1>
+                                <div class="modalDescricao">
+                                    <div class="descricao">
+                                        <span>Nome: <input type="text" name="CriarProduto" id="CriarProduto"
+                                                placeholder="Nome do seu produto"></span>
+
+                                        <span>Descrição: <input type="text" name="CriarProduto" id="CriarProduto"
+                                                placeholder="Uma breve descrição"></span>
+
+                                        <span>Quantidade: <input type="number" name="CriarProduto" id="CriarProduto"
+                                                placeholder="Quantos produtos você tem?"></span>
+                                    </div>
+                                    <div class="separacao">
+
+
+                                        <span>Preço: <input type="text" name="CriarProduto" id="CriarProduto"
+                                                placeholder="Preço atual"></span>
+
+                                        <span>Data: <input type="date" name="CriarProduto" id="CriarProduto"
+                                                placeholder="Data de cadastro"></span>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="close-modal" id="closeModal">
+                            </div>
+                        </div> <!--modal-content-->
+                    </div>
                 </div> <!--main central painel-->
             </div> <!--conteiner flex de separacao-->
         </div> <!--conteiner pai-->
     </header>
 
-<script src="web.js"></script>
+    <script src="web.js"></script>
 </body>
 
 </html>
