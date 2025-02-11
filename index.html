@@ -35,12 +35,7 @@
                             <a href="#">
                                 <li><i class="bi bi-box-seam"></i></li>Estoque
                             </a>
-                            <a href="#">
-                                <li><i class="bi bi-phone"></i></i></li>Componentes
-                            </a>
-                            <a href="#">
-                                <li><i class="bi bi-tools"></i></i></li>Materiais
-                            </a>
+
                         </ul>
                     </div>
                 </nav>
@@ -76,25 +71,67 @@
 
                 <!--main central painel-->
                 <div class="painel">
-                    <div class="pesquisar">
 
+
+                    <div class="pesquisar">
                         <div class="abaDeProcura">
                             <span><i class="bi bi-search"></i></span>
                             <input type="text" name="pesquisa" id="pequisa" placeholder="Pesquisar">
                         </div>
 
                         <div class="adiciona-produtos">
-                            <button id="adiciona-produtos">Novo +</button>
+                            <button id="adiciona-produtos">
+                                <h2>Novo</h2> <span>+</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Modal para recuperação de senha -->
+                    <div class="ArmazanaProdutos">
+                        <div class="infomacaoProduto">
+                            <span>Código</span>
+                            <span>Nome</span>
+                            <span>Quantidade</span>
+                            <span>Editar</span>
+                            <span>Deletar</span>
+                        </div>
+
+                        <div class="bordaSeparadora"></div>
+
+                        <div class="Produtos">
+                            <div class="codigo">
+                                <h2>#HDSNJS</h2>
+                            </div>
+
+                            <div class="nome">
+                                <h2>Relogio</h2>
+                                
+                            </div>
+
+                            <div class="quantidade">
+                                <h2>231</h2>
+                             
+                            </div>
+
+                            <div class="editar">
+                                <h2 id="bi-pencil-fill"><i class="bi bi-pencil-fill"></i></h2>
+                                <h2 id="bi-pencil-fill"><i class="bi bi-pencil-fill"></i></h2>
+                            </div>
+
+                            <div class="deletar">
+                                <h2><i class="bi bi-trash-fill"></i></h2>
+                            
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Modal para cadastrar produtos -->
                     <div class="modal" id="recoverModal">
 
                         <div class="modal-content">
 
                             <div class="modalCadastro">
                                 <h1>Cadastro de produtos</h1>
+                                <i class="bi bi-x-lg" id="bnt-fechaModal"></i>
                                 <div class="modalDescricao">
                                     <div class="descricao">
                                         <span>Nome: <input type="text" name="CriarProduto" id="CriarProduto"
@@ -116,18 +153,59 @@
                                                 placeholder="Data de cadastro"></span>
 
                                     </div>
-
-
                                 </div>
+
+                                <button type="submit" class="bnt-cadastrar">Cadastrar</button>
                             </div>
 
                             <div class="close-modal" id="closeModal">
                             </div>
                         </div> <!--modal-content-->
-                    </div>
-                </div> <!--main central painel-->
-            </div> <!--conteiner flex de separacao-->
-        </div> <!--conteiner pai-->
+
+                    </div> <!--main central painel-->
+
+                    <!-- modal para editar os produdos cadastrados -->
+
+                    <div class="modalEditar" id="recoverModalEditar">
+
+                        <div class="modal-contentEditar">
+
+                            <div class="modalCadastroEditar">
+                                <h1>Editar produtos</h1>
+                                <i class="bi bi-x-lg" id="bnt-fechaEditar"></i>
+                                <div class="modalDescricaoEdicao">
+                                    <div class="descricaoDeEdita">
+                                        <span>Nome: <input type="text" name="EditarProdutos" id="EditarProdutos"
+                                                placeholder="Nome do seu produto"></span>
+
+                                        <span>Descrição: <input type="text" name="EditarProdutos" id="EditarProdutos"
+                                                placeholder="Uma breve descrição"></span>
+
+                                        <span>Quantidade: <input type="number" name="EditarProdutos" id="EditarProdutos"
+                                                placeholder="Quantos produtos você tem?"></span>
+                                    </div>
+                                    <div class="separacao">
+
+
+                                        <span>Preço: <input type="text" name="EditarProdutos" id="EditarProdutos"
+                                                placeholder="Preço atual"></span>
+
+                                        <span>Data: <input type="date" name="EditarProdutos" id="EditarProdutos"
+                                                placeholder="Data de cadastro"></span>
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="bnt-editar">Salvar</button>
+                            </div>
+
+                            <div class="close-modalEditar" id="closeModalEditar">
+                            </div>
+                        </div> <!--modal-content-->
+                    <!-- modal para editar os produdos cadastrados -->
+
+                </div> <!--conteiner flex de separacao-->
+            </div> <!--conteiner pai-->
     </header>
 
     <script src="web.js"></script>
