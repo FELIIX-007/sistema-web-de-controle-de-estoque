@@ -4,14 +4,31 @@ from produtos.models import Produto
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ProdutoForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('pagina_inicial')  # Redireciona para a página inicial após login
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'produtos/login.html', {'form': form})
+
 
 @login_required
 def pagina_inicial(request):
     produtos = Produto.objects.all()
-    return render(request, 'estoque/pagina_inicial.html')
+    return render(request, 'estoque/pagina_inicial.html', {'produtos': produtos})
 
+
+@login_required
 def cadastrar_produto(request):
     if request.method == 'POST':
         form = ProdutoForm(request.POST)
