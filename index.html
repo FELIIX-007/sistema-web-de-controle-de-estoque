@@ -1,213 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <title>Pagina web</title>
+  <title>Sistema de Gestão de Estoque</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="img/Imagem_do_WhatsApp_de_2025-02-10_à_s__15.36.03_e263291e-removebg-preview.png" alt="Logo">
+      </div>
+      <ul class="menu">
+        <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="#"><i class="fas fa-box"></i> Estoque</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      <header>
+        <h1><span>Componentes </span> / Estoque</h1>
+        <div class="user-info">
+          <span>Nome do usuário</span>
+          <img src="user.png" alt="Foto do usuário">
+        </div>
+      </header>
+      <section class="inventory">
+        <div class="search-bar">
+          <input type="text" placeholder="Pesquisar...">
+          <button class="new-item">Novo <i class="fas fa-plus"></i></button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Editar</th>
+              <th>Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#HDSNJS</td>
+              <td>Relogio</td>
+              <td>231</td>
+              <td><button class="edit"><i class="fas fa-edit"></i></button></td>
+              <td><button class="delete"><i class="fas fa-trash-alt"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+       
+      </section>
+    </main>
+  </div>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Editar Item</h2>
+      <form id="editForm">
+        <input type="text" id="editCode" placeholder="Código">
+        <input type="text" id="editName" placeholder="Nome">
+        <input type="number" id="editQuantity" placeholder="Quantidade">
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Cadastrar Item</h2>
+      <form id="addForm">
+        <input type="text" id="addCode" placeholder="Código">
+        <input type="text" id="addName" placeholder="Nome">
+        <input type="number" id="addQuantity" placeholder="Quantidade">
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </div>
 
 
-    <header>
-        <div class="conteiner"> <!--conteiner pai-->
-
-            <!-- barra lateral -->
-            <div class="content">
-                <div class="logo">
-                    <img src="img/Imagem_do_WhatsApp_de_2025-02-10_à_s__15.36.03_e263291e-removebg-preview.png"
-                        alt="foto de perfil">
-                </div>
-
-                <div class="inicio">
-                    <span><i class="bi bi-columns-gap"></i></span>
-                    <span>inicio</span>
-                </div>
-                <nav>
-                    <div class="lista-navegacao">
-                        <ul>
-                            <a href="#">
-                                <li><i class="bi bi-box-seam"></i></li>Estoque
-                            </a>
-
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-
-            <!-- barra lateral -->
-
-
-            <div class="display"> <!--conteiner flex de separacao-->
-
-                <!--conteiner header principal-->
-                <div class="conteiner-cabecalho">
-
-                    <div class="cabecalho">
-                        <span class="titulo">Componentes</span>
-                        <span> / </span>
-                        <span> Estoque</span>
-                    </div>
-
-
-                    <div class="informacoes-usuario">
-                        <div class="infomacoes">
-                            <h1>Seu nome</h1>
-                            <h2> xxxxxxxx@gmail.com</h2>
-                        </div>
-
-                        <div class="foto-perfil">
-                            <span><i class="bi bi-person-bounding-box"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <!--conteiner header principal-->
-
-                <!--main central painel-->
-                <div class="painel">
-
-
-                    <div class="pesquisar">
-                        <div class="abaDeProcura">
-                            <span><i class="bi bi-search"></i></span>
-                            <input type="text" name="pesquisa" id="pequisa" placeholder="Pesquisar">
-                        </div>
-
-                        <div class="adiciona-produtos">
-                            <button id="adiciona-produtos">
-                                <h2>Novo</h2> <span>+</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="ArmazanaProdutos">
-                        <div class="infomacaoProduto">
-                            <span>Código</span>
-                            <span>Nome</span>
-                            <span>Quantidade</span>
-                            <span>Editar</span>
-                            <span>Deletar</span>
-                        </div>
-
-                        <div class="bordaSeparadora"></div>
-
-                        <div class="Produtos">
-                            <div class="codigo">
-                                <h2>#HDSNJS</h2>
-                            </div>
-
-                            <div class="nome">
-                                <h2>Relogio</h2>
-                                
-                            </div>
-
-                            <div class="quantidade">
-                                <h2>231</h2>
-                             
-                            </div>
-
-                            <div class="editar">
-                                <h2 id="bi-pencil-fill"><i class="bi bi-pencil-fill"></i></h2>
-                            </div>
-
-                            <div class="deletar">
-                                <h2><i class="bi bi-trash-fill"></i></h2>
-                            
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Modal para cadastrar produtos -->
-                    <div class="modal" id="recoverModal">
-
-                        <div class="modal-content">
-
-                            <div class="modalCadastro">
-                                <h1>Cadastro de produtos</h1>
-                                <i class="bi bi-x-lg" id="bnt-fechaModal"></i>
-                                <div class="modalDescricao">
-                                    <div class="descricao">
-                                        <span>Nome: <input type="text" name="CriarProduto" id="CriarProduto"
-                                                placeholder="Nome do seu produto"></span>
-
-                                        <span>Descrição: <input type="text" name="CriarProduto" id="CriarProduto"
-                                                placeholder="Uma breve descrição"></span>
-
-                                        <span>Quantidade: <input type="number" name="CriarProduto" id="CriarProduto"
-                                                placeholder="Quantos produtos você tem?"></span>
-                                    </div>
-                                    <div class="separacao">
-
-
-                                        <span>Preço: <input type="text" name="CriarProduto" id="CriarProduto"
-                                                placeholder="Preço atual"></span>
-
-                                        <span>Data: <input type="date" name="CriarProduto" id="CriarProduto"
-                                                placeholder="Data de cadastro"></span>
-
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="bnt-cadastrar">Cadastrar</button>
-                            </div>
-
-                            <div class="close-modal" id="closeModal">
-                            </div>
-                        </div> <!--modal-content-->
-
-                    </div> <!--main central painel-->
-
-                    <!-- modal para editar os produdos cadastrados -->
-
-                    <div class="modalEditar" id="recoverModalEditar">
-
-                        <div class="modal-contentEditar">
-
-                            <div class="modalCadastroEditar">
-                                <h1>Editar produtos</h1>
-                                <i class="bi bi-x-lg" id="bnt-fechaEditar"></i>
-                                <div class="modalDescricaoEdicao">
-                                    <div class="descricaoDeEdita">
-                                        <span>Nome: <input type="text" name="EditarProdutos" id="EditarProdutos"
-                                                placeholder="Nome do seu produto"></span>
-
-                                        <span>Descrição: <input type="text" name="EditarProdutos" id="EditarProdutos"
-                                                placeholder="Uma breve descrição"></span>
-
-                                        <span>Quantidade: <input type="number" name="EditarProdutos" id="EditarProdutos"
-                                                placeholder="Quantos produtos você tem?"></span>
-                                    </div>
-                                    <div class="separacao">
-
-
-                                        <span>Preço: <input type="text" name="EditarProdutos" id="EditarProdutos"
-                                                placeholder="Preço atual"></span>
-
-                                        <span>Data: <input type="date" name="EditarProdutos" id="EditarProdutos"
-                                                placeholder="Data de cadastro"></span>
-
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="bnt-editar">Salvar</button>
-                            </div>
-
-                            <div class="close-modalEditar" id="closeModalEditar">
-                            </div>
-                        </div> <!--modal-content-->
-                   </div> <!-- modal para editar os produdos cadastrados -->
-                
-                </div> <!--conteiner flex de separacao-->
-            </div> <!--conteiner pai-->
-    </header>
-
-    <script src="web.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
