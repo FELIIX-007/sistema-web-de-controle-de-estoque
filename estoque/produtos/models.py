@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 # Create your models here.
 
@@ -8,7 +9,7 @@ class Produto (models.Model):
     descricao = models.TextField(blank=True, null=True)
     preco = models.DecimalField(max_digits=8, decimal_places=2)
     quantidade = models.IntegerField()
-    data_cadastro = models.DateTimeField(auto_now_add=True)
+    data_cadastro = models.DateField(default=timezone.now)
 
     def __str__ (self):
         return self.nome

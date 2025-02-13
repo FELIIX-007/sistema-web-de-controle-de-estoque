@@ -3,10 +3,10 @@ from django.contrib.auth.views import LoginView
 from produtos.models import Produto
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils import timezone
-from django.http import JsonResponse
 
 # Create your views here.
 
@@ -51,11 +51,11 @@ def cadastrar_produto(request):
 
     # Passar a data atual para o template, também no formato YYYY-MM-DD
     data_atual = '2025-02-12'  # Apenas a data (sem o horário)
-    return render(request, 'estoque/cadastrar_produto.html')
+    return render(request, 'estoque/cadastrar_produto.html', {'data_atual': data_atual})
 
-@login_required
-def editar_produto(request, produto_id):
-    produto = get_object_or_404(Produto, id=produto_id)
+
+def editar_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
     if request.method == 'POST':
         produto.nome = request.POST.get('nomeProduto')
         produto.descricao = request.POST.get('descricaoProduto')
@@ -67,7 +67,7 @@ def editar_produto(request, produto_id):
         messages.success(request, "Produto atualizado com sucesso!")
         return redirect('pagina_inicial')  # Redirecione para a página desejada
 
-    return render(request, 'estoque/editar_produto.html', {'produto': produto})
+    return render(request, 'estoque/editar_produto.html', {'produto': produto}, produto_id=produto.id)
 
 @login_required
 def excluir_produto(request, produto_id):
@@ -78,7 +78,6 @@ def excluir_produto(request, produto_id):
         return redirect('pagina_inicial')  # Redireciona após a exclusão
     return redirect('pagina_inicial')  # Se não for POST, apenas redireciona
 
-@login_required
 def detalhe_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
     return render(request, 'estoque/detalhe_produto.html', {'produto': produto})
@@ -92,13 +91,3 @@ def filtro_produtos(request):
 
 class CustomLoginView(LoginView):
     template_name = 'estoque/login.html'
-
-@login_required
-def filtrar_produtos(request):
-    produtos = Produto.objects.all()
-
-    if 'id' in request.GET:
-        produto_id = request.GET['id']
-        produtos = produtos.filter(id=produto_id)
-    
-    return render(request, 'estoque/lista_produtos.html', {'produtos': produtos})
