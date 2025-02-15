@@ -6,11 +6,39 @@ body {
   width: 100%;
   height: 100svh;
   background-color: #f5f5f5;
+  overflow: hidden;
 }
-
 .container {
   display: flex;
 }
+
+/* Personaliza a barra de rolagem geral */
+.inventory::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px; 
+}
+
+/* Fundo da barra de rolagem */
+.inventory::-webkit-scrollbar-track,
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cinza claro */
+  border-radius: 10px;
+}
+
+/* Estiliza a parte de dentro (parte que se move) */
+.inventory::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+  background: #05850a; /* Cor verde para combinar com os botões */
+  border-radius: 10px;
+}
+
+/* Ao passar o mouse sobre a barra de rolagem */
+.inventory::-webkit-scrollbar-thumb:hover,
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #085f0b; /* Tom mais escuro ao passar o mouse */
+}
+
 
 .sidebar {
   width: 250px;
@@ -89,6 +117,10 @@ header {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 73vh; /* Limita a altura ao tamanho da tela */
+  overflow: auto; /* Adiciona scroll quando necessário */
+  display: flex;
+  flex-direction: column;
 }
 
 .search-bar {
@@ -98,12 +130,17 @@ header {
   padding: 0px 10px;
 }
 
-.search-bar input{
+.search-bar input {
   font-size: 1.1rem;
   padding-left: 10px;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 5px;
   outline: none;
+}
+
+.table-container {
+  flex-grow: 1; /* Faz a tabela ocupar o espaço restante */
+  overflow: auto; /* Adiciona scroll caso a tabela ultrapasse a altura */
 }
 
 table {
@@ -124,16 +161,15 @@ th, td {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  
 }
 
-.delete{
-color: rgb(207, 10, 10);
-border-radius: 30%;
-border: 0;
+.delete {
+  color: rgb(207, 10, 10);
+  border-radius: 30%;
+  border: 0;
 }
 
-.edit{
+.edit {
   color: #067930;
   border-radius: 30%;
   border: 0;
@@ -147,6 +183,7 @@ border: 0;
   border-radius: 10px;
   cursor: pointer;
 }
+
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -224,3 +261,4 @@ border: 0;
 .modal-content form button{
   border: 0;
 }
+

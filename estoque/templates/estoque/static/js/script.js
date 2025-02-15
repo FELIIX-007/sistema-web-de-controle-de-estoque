@@ -13,7 +13,6 @@ const addForm = document.getElementById('addForm');
 
 // Botões de fechar os modais
 const closeEditModalButton = editModal.querySelector('.close-button');
-const closeAddModalButton = addModal.querySelector('.close-button');
 
 // Função para buscar itens na tabela
 function searchItems() {
@@ -34,11 +33,6 @@ function searchItems() {
 }
 
 
-// Função para adicionar um novo item à tabela
-function addNewItem() {
-  addModal.style.display = 'block';
-}
-
 // Função para salvar as alterações no modal de edição
 function saveEditChanges(event) {
   event.preventDefault();
@@ -55,53 +49,17 @@ function saveEditChanges(event) {
   editModal.style.display = 'none';
 }
 
-// Função para cadastrar um novo item no modal de cadastro
-function addNewItemToList(event) {
-  event.preventDefault();
-
-  const code = addForm.querySelector('#addCode').value;
-  const name = addForm.querySelector('#addName').value;
-  const quantity = addForm.querySelector('#addQuantity').value;
-
-  const newRow = tableBody.insertRow();
-
-  const codeCell = newRow.insertCell();
-  const nameCell = newRow.insertCell();
-  const quantityCell = newRow.insertCell();
-  const editCell = newRow.insertCell();
-  const deleteCell = newRow.insertCell();
-
-  codeCell.textContent = code;
-  nameCell.textContent = name;
-  quantityCell.textContent = quantity;
-
-  const editButton = document.createElement('button');
-  editButton.className = 'edit';
-  editButton.innerHTML = '<i class="fas fa-edit"></i>';
-  editButton.addEventListener('click', () => editItem(newRow));
-  editCell.appendChild(editButton);
-
-  const deleteButton = document.createElement('button');
-  deleteButton.className = 'delete';
-  deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-  deleteButton.addEventListener('click', () => deleteItem(newRow));
-  deleteCell.appendChild(deleteButton);
-
-  addModal.style.display = 'none';
-  addForm.reset();
-}
-
 // Eventos para elementos estáticos
 searchInput.addEventListener('input', searchItems);
-newItemButton.addEventListener('click', addNewItem);
+
 
 // Eventos para modais
 closeEditModalButton.addEventListener('click', () => editModal.style.display = 'none');
-closeAddModalButton.addEventListener('click', () => addModal.style.display = 'none');
+
 
 // Eventos para formulários
 editForm.addEventListener('submit', saveEditChanges);
-addForm.addEventListener('submit', addNewItemToList);
+
 
 // Eventos para botões existentes (delegação de eventos)
 tableBody.addEventListener('click', (event) => {
@@ -139,14 +97,12 @@ document.addEventListener("DOMContentLoaded", function() {
               })
               .then(response => {
                   if (response.ok) {
-                      // Se a exclusão for bem-sucedida, remove a linha da tabela
-                      this.closest("tr").remove();
+                      location.reload();
                   } else {
                       alert("Erro ao excluir o produto.");
                   }
               })
               .catch(error => console.error("Erro:", error));
-              location.reload();
           } else {
               // Se o usuário cancelar, apenas loga a ação
               console.log("Exclusão cancelada.");

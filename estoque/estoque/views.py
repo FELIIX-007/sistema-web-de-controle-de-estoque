@@ -10,17 +10,19 @@ from django.utils import timezone
 
 # Create your views here.
 
+@login_required
 def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
             login(request, user)
-            return redirect('pagina_inicial')  # Redireciona para a página inicial após login
+            messages.success(request, "Login realizado com sucesso!")  # ✅ Mensagem de sucesso
+            return redirect("pagina_inicial")  
     else:
-        form = AuthenticationForm()
-    
-    return render(request, 'produtos/login.html', {'form': form})
+            messages.error(request, "Usuário ou senha incorretos.")  # ✅ Mensagem de erro
+            return render(request, "login.html")
 
 
 @login_required
@@ -53,21 +55,28 @@ def cadastrar_produto(request):
     data_atual = '2025-02-12'  # Apenas a data (sem o horário)
     return render(request, 'estoque/cadastrar_produto.html', {'data_atual': data_atual})
 
-
+@login_required
 def editar_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
     if request.method == 'POST':
         produto.nome = request.POST.get('nomeProduto')
         produto.descricao = request.POST.get('descricaoProduto')
-        produto.quantidade = request.POST.get('quantidadeProduto')
-        produto.preco = request.POST.get('precoProduto')
-        produto.data_cadastro = request.POST.get('dataCadastro')  # Caso necessário
+        produto.quantidade = int(request.POST.get('quantidadeProduto', produto.quantidade))
+        # Substitui a vírgula pelo ponto antes de converter
+        preco_str = request.POST.get("precoProduto").replace(",", ".")  
+        try:
+            produto.preco = float(preco_str)  # Converte para float
+        except ValueError:
+            messages.error(request, "Erro: O preço deve ser um número válido.")
+            return render(request, "estoque/editar_produto.html", {"produto": produto})
+
         produto.save()
 
         messages.success(request, "Produto atualizado com sucesso!")
         return redirect('pagina_inicial')  # Redirecione para a página desejada
 
-    return render(request, 'estoque/editar_produto.html', {'produto': produto}, produto_id=produto.id)
+    return render(request, 'estoque/editar_produto.html', {'produto': produto})
+
 
 @login_required
 def excluir_produto(request, produto_id):
@@ -88,6 +97,6 @@ def filtro_produtos(request):
     return render(request, 'estoque/listar_produtos.html', {'produtos': produtos})
 
 
-
+@login_required
 class CustomLoginView(LoginView):
     template_name = 'estoque/login.html'

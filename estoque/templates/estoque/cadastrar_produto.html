@@ -5,16 +5,16 @@
   <title>Sistema de Gestão de Estoque</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+  <link rel="shortcut icon" type="imagex/png" href="{% static 'img/icon.ico' %}">
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-        <img src="{% static 'img/Logo_oficial.png' %}" alt="Logo">
+        <img src="{% static 'img/logo_oficial.png' %}" alt="Logo">
       </div>
       <ul class="menu">
-        <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="#"><i class="fas fa-box"></i> Estoque</a></li>
+        <li><a href="{% url 'login' %}"><i class="fas fa-home"></i> Sair</a></li>
       </ul>
     </aside>
     <main class="content">
@@ -42,14 +42,32 @@
           </thead>
           <tbody>
             <tr>
-                {% for produto in produtos %}
-                    <td>{{ produto.id }}</td>
-                    <td>{{ produto.nome }}</td>
-                    <td>{{ produto.quantidade }}</td>
-                    <td><button class="edit"><i class="fas fa-edit"></i></button></td>
-                    <td><button class="delete"><i class="fas fa-trash-alt"></i></button></td>
-                    </tr>
-                {% endfor %}
+              {% for produto in produtos %}
+                <td>
+                  #PROD{{ produto.id }}
+                </td>
+                <td>
+                  {{ produto.nome }}
+                </td>
+                <td>
+                  {{ produto.quantidade }}
+                </td>
+                <td>
+                  {{ produto.preco }}
+                </td>
+                <td>
+                  <a href="{% url 'editar_produto' produto.id %}" class="edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </td>
+                </td>
+                <td>
+                    <button class="delete" data-id="{{ produto.id }}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+              {% endfor %}
+            </tr>
           </tbody>
         </table>
        
@@ -66,8 +84,7 @@
         <input type="text" name="nomeProduto" id="addName" placeholder="Nome">
         <input type="text" name="descricaoProduto" id="addDescription" placeholder="Descrição">
         <input type="number" name="quantidadeProduto" id="addQuantity" placeholder="Quantidade">
-        <input type="number" name="precoProduto" id="addPrice" placeholder="Preço">
-        <input type="date" name="dataCadastro" id="addDate" value="{{ data_atual|date:'Y-m-d' }}" placeholder="Data de cadastro" disabled>
+        <input type="text" name="precoProduto" id="addPrice" placeholder="Preço">
         <button type="submit">Cadastrar</button>
       </form>
     </div>

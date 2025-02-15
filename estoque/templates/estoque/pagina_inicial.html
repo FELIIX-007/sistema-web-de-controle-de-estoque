@@ -5,16 +5,16 @@
   <title>Sistema de Gestão de Estoque</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+  <link rel="shortcut icon" type="imagex/png" href="{% static 'img/icon.ico' %}">
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-        <img src="{% static 'img/Logo_oficial.png' %}" alt="Logo">
+        <img src="{% static 'img/logo_oficial.png' %}" alt="Logo">
       </div>
       <ul class="menu">
-        <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="#"><i class="fas fa-box"></i> Estoque</a></li>
+        <li><a href="{% url 'login' %}"><i class="fas fa-home"></i> Sair</a></li>
       </ul>
     </aside>
     <main class="content">
@@ -36,6 +36,7 @@
               <th>Código</th>
               <th>Nome</th>
               <th>Quantidade</th>
+              <th>Preço</th>
               <th>Editar</th>
               <th>Deletar</th>
             </tr>
@@ -53,9 +54,12 @@
                       {{ produto.quantidade }}
                     </td>
                     <td>
-                        <button class="edit" data-id="{{ produto.id }}">
-                            <i class="fas fa-edit"></i>
-                        </button>
+                      {{ produto.preco }}
+                    </td>
+                    <td>
+                      <a href="{% url 'editar_produto' produto.id %}" class="edit">
+                        <i class="fas fa-edit"></i>
+                      </a>
                     </td>
                     </td>
                     <td>

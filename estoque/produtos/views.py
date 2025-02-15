@@ -10,17 +10,19 @@ from django.http import JsonResponse
 
 # Create your views here.
 
+@login_required
 def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
             login(request, user)
-            return redirect('pagina_inicial')  # Redireciona para a página inicial após login
+            messages.success(request, "Login realizado com sucesso!")
+            return redirect("pagina_inicial")  
     else:
-        form = AuthenticationForm()
-    
-    return render(request, 'produtos/login.html', {'form': form})
+            messages.error(request, "Usuário ou senha incorretos.")
+            return render(request, "login.html")
 
 
 @login_required
@@ -60,8 +62,14 @@ def editar_produto(request, produto_id):
         produto.nome = request.POST.get('nomeProduto')
         produto.descricao = request.POST.get('descricaoProduto')
         produto.quantidade = request.POST.get('quantidadeProduto')
-        produto.preco = request.POST.get('precoProduto')
-        produto.data_cadastro = request.POST.get('dataCadastro')  # Caso necessário
+        # Substitui a vírgula pelo ponto antes de converter
+        preco_str = request.POST.get("precoProduto").replace(",", ".")  
+        try:
+            produto.preco = float(preco_str)  # Converte para float
+        except ValueError:
+            messages.error(request, "Erro: O preço deve ser um número válido.")
+            return render(request, "estoque/editar_produto.html", {"produto": produto})
+
         produto.save()
 
         messages.success(request, "Produto atualizado com sucesso!")

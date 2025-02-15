@@ -9,7 +9,7 @@
     <title>Pagina de login</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/login_page.css' %}">
-
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'img/icon.ico' %}">
 </head>
 
 <body>
@@ -31,14 +31,6 @@
                 </div>
                 <button type="submit" class="submit-btn">Acessar</button>
             </form>
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <p class="{{ message.tags }}">{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <a href="#" class="forgot-password">Esqueceu ou deseja alterar sua senha?</a>
         </div>
     </div>
 
