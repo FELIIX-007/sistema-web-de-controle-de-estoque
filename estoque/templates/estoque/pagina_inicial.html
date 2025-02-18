@@ -48,7 +48,7 @@
                       #PROD{{ produto.id }}
                     </td>
                     <td>
-                      {{ produto.nome }}
+                      <a href="{% url 'detalhe_produto' produto.id %}" id="edit">{{ produto.nome }}</a>
                     </td>
                     <td>
                       {{ produto.quantidade }}

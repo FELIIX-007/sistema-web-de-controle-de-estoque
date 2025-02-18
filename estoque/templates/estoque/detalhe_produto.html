@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Gestão de Estoque</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+  <link rel="shortcut icon" type="imagex/png" href="{% static 'img/icon.ico' %}">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="{% static 'img/logo_oficial.png' %}" alt="Logo">
+      </div>
+      <ul class="menu">
+        <li><a href="{% url 'login' %}"><i class="fas fa-home"></i> Sair</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      <header>
+        <h1><span>Componentes </span> / Estoque</h1>
+        <div class="user-info">
+          <span>Olá, {{ user.first_name }}!</span>
+          <img src="{% static 'img/user.jpeg' %}" alt="Foto do usuário">
+        </div>
+      </header>
+      <section class="inventory">
+        <div class="search-bar">
+          <input type="text" placeholder="Pesquisar...">
+          <button class="new-item">Novo <i class="fas fa-plus"></i></button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Editar</th>
+              <th>Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for produto in produtos %}
+                <td>
+                  #PROD{{ produto.id }}
+                </td>
+                <td>
+                  {{ produto.nome }}
+                </td>
+                <td>
+                  {{ produto.quantidade }}
+                </td>
+                <td>
+                  {{ produto.preco }}
+                </td>
+                <td>
+                  <a href="{% url 'editar_produto' produto.id %}" class="edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </td>
+                </td>
+                <td>
+                    <button class="delete" data-id="{{ produto.id }}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+       
+      </section>
+    </main>
+  </div>
+  
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="close-button">&times;</span>
+      <h2>Detalhes do produto</h2>
+      <form method="POST" action="{% url 'cadastrar_produto' %}" id="addForm">
+        {% csrf_token %}
+        
+        <input type="text" name="nomeProduto" id="addName" value="{{ produto.nome }}" placeholder="Nome" disabled>
+
+        <input type="text" name="descricaoProduto" id="addDescription" value="{{ produto.descricao }}" placeholder="Descrição" disabled>
+        <input type="number" name="quantidadeProduto" id="addQuantity" value="{{ produto.quantidade }}" placeholder="Quantidade" disabled>
+        <input type="text" name="precoProduto" id="addPrice" value="{{ produto.preco }}" placeholder="Preço" disabled>
+        <input type="date" name="dataCadastro" id="addDate" value="{{ produto.data_cadastro|date:'Y-m-d' }}" placeholder="Data de cadastro" disabled>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Editar Item</h2>
+      <form id="editForm">
+        <input type="text" id="editCode" placeholder="Código">
+        <input type="text" id="editName" placeholder="Nome">
+        <input type="number" id="editQuantity" placeholder="Quantidade">
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seleciona o modal pelo ID ou classe (troque pelo ID correto do seu modal)
+        var modal = document.querySelector(".modal");
+
+        // Verifica se o modal existe na página
+        if (modal) {
+            modal.style.display = "block";  // Exibe o modal
+        }
+        
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seleciona o botão de fechar e o modal
+        var fecharModal = document.getElementById("close-button");  // ID do botão de fechar
+        var modal = document.querySelector(".modal");  // Classe do modal
+        
+        // Verifica se os elementos existem na página
+        if (fecharModal && modal) {
+            fecharModal.addEventListener("click", function () {
+                window.location.href = "{% url 'pagina_inicial' %}";  // Redireciona para a página principal
+            });
+        }
+    });
+  </script>
+
+</body>
+</html>

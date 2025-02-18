@@ -155,12 +155,13 @@ th, td {
   font-size: 1.2rem;
 }
 
+
 .edit, .delete {
   background: none;
   font-size: 1.2rem;
   width: 50px;
   height: 50px;
-  cursor: pointer;
+  cursor: pointer;  
 }
 
 .delete {
@@ -173,6 +174,11 @@ th, td {
   color: #067930;
   border-radius: 30%;
   border: 0;
+}
+
+#edit {
+  text-decoration: none;
+  color: #424040;
 }
 
 .new-item {
