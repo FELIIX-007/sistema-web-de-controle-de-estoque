@@ -49,18 +49,17 @@ function saveEditChanges(event) {
   editModal.style.display = 'none';
 }
 
-
 // Eventos para elementos estáticos
 searchInput.addEventListener('input', searchItems);
-newItemButton.addEventListener('click', addNewItem);
+
 
 // Eventos para modais
 closeEditModalButton.addEventListener('click', () => editModal.style.display = 'none');
-closeAddModalButton.addEventListener('click', () => addModal.style.display = 'none');
+
 
 // Eventos para formulários
 editForm.addEventListener('submit', saveEditChanges);
-addForm.addEventListener('submit', addNewItemToList);
+
 
 // Eventos para botões existentes (delegação de eventos)
 tableBody.addEventListener('click', (event) => {
@@ -98,14 +97,12 @@ document.addEventListener("DOMContentLoaded", function() {
               })
               .then(response => {
                   if (response.ok) {
-                      // Se a exclusão for bem-sucedida, remove a linha da tabela
-                      this.closest("tr").remove();
+                      location.reload();
                   } else {
                       alert("Erro ao excluir o produto.");
                   }
               })
               .catch(error => console.error("Erro:", error));
-              location.reload();
           } else {
               // Se o usuário cancelar, apenas loga a ação
               console.log("Exclusão cancelada.");

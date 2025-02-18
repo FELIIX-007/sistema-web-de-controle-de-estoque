@@ -7,7 +7,7 @@ from django.utils import timezone
 class Produto (models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField(blank=True, null=True)
-    preco = models.DecimalField(max_digits=8, decimal_places=2)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     quantidade = models.IntegerField()
     data_cadastro = models.DateField(default=timezone.now)
 
