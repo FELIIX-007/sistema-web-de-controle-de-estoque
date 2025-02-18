@@ -81,14 +81,13 @@
       <h2>Detalhes do produto</h2>
       <form method="POST" action="{% url 'cadastrar_produto' %}" id="addForm">
         {% csrf_token %}
-        
+
         <input type="text" name="nomeProduto" id="addName" value="{{ produto.nome }}" placeholder="Nome" disabled>
 
         <input type="text" name="descricaoProduto" id="addDescription" value="{{ produto.descricao }}" placeholder="Descrição" disabled>
         <input type="number" name="quantidadeProduto" id="addQuantity" value="{{ produto.quantidade }}" placeholder="Quantidade" disabled>
         <input type="text" name="precoProduto" id="addPrice" value="{{ produto.preco }}" placeholder="Preço" disabled>
         <input type="date" name="dataCadastro" id="addDate" value="{{ produto.data_cadastro|date:'Y-m-d' }}" placeholder="Data de cadastro" disabled>
-        <button type="submit">Cadastrar</button>
       </form>
     </div>
   </div>

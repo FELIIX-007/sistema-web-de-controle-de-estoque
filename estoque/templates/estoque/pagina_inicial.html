@@ -36,7 +36,6 @@
               <th>Código</th>
               <th>Nome</th>
               <th>Quantidade</th>
-              <th>Preço</th>
               <th>Editar</th>
               <th>Deletar</th>
             </tr>
@@ -52,9 +51,6 @@
                     </td>
                     <td>
                       {{ produto.quantidade }}
-                    </td>
-                    <td>
-                      {{ produto.preco }}
                     </td>
                     <td>
                       <a href="{% url 'editar_produto' produto.id %}" class="edit">
