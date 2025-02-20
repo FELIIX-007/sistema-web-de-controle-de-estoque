@@ -38,7 +38,7 @@ SECRET_KEY = 'django-insecure-*y!twp%p4x8@ox@f1s_n@(aj8&v!$361(g(xx&(7@-idqzs(bc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -143,7 +143,7 @@ import os
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/estoque/static'),  # Certifique-se de que este diretório existe
